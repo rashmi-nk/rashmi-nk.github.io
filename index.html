@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rashmi NK | NOC & DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0B1628;
+    --navy-card: #111f36;
+    --navy-border: #1E3A5F;
+    --cyan: #00D4FF;
+    --cyan-dim: #00a8cc;
+    --cyan-glow: rgba(0, 212, 255, 0.15);
+    --white: #F0F4FF;
+    --muted: #7B93B3;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(11, 22, 40, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--navy-border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.1rem;
+    color: var(--cyan);
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: #B8CDE8; text-decoration: none;
+    font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 900px; margin: 0 auto; width: 100%;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.8rem; color: var(--cyan);
+    letter-spacing: 0.1em; margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 2rem; height: 1px; background: var(--cyan);
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    font-weight: 700; line-height: 1.05;
+    margin-bottom: 0.4rem;
+    color: #FFFFFF;
+  }
+  .hero-title-dim { color: #A8C0DC; font-weight: 300; }
+  .terminal-block {
+    margin: 2rem 0;
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 620px;
+  }
+  .terminal-bar {
+    background: #0d1f35;
+    padding: 0.55rem 1rem;
+    display: flex; align-items: center; gap: 0.45rem;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #ffbd2e; }
+  .dot-g { background: #28ca41; }
+  .terminal-body {
+    padding: 1.2rem 1.4rem;
+    font-family: var(--mono); font-size: 0.82rem;
+    line-height: 1.9; color: var(--white);
+  }
+  .t-prompt { color: var(--cyan); }
+  .t-cmd { color: #e0e0e0; }
+  .t-out { color: #94AECB; }
+  .t-hi { color: var(--cyan); }
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 1em;
+    background: var(--cyan);
+    vertical-align: text-bottom;
+    animation: blink 1.1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .hero-desc {
+    font-size: 1.05rem; color: #C5D8EE;
+    max-width: 560px; margin-bottom: 2rem;
+    line-height: 1.75;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--cyan); color: var(--navy);
+    padding: 0.75rem 1.8rem; border-radius: 6px;
+    font-weight: 600; font-size: 0.9rem;
+    text-decoration: none; transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover {
+    background: #33deff;
+    box-shadow: 0 0 24px rgba(0,212,255,0.35);
+    transform: translateY(-1px);
+  }
+  .btn-ghost {
+    border: 1px solid #3A5A80; color: #D0E4F7;
+    padding: 0.75rem 1.8rem; border-radius: 6px;
+    font-weight: 500; font-size: 0.9rem;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--cyan); color: var(--cyan);
+    background: var(--cyan-glow);
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; background: var(--navy); }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--mono); font-size: 0.75rem;
+    color: var(--cyan); letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 700; margin-bottom: 3rem;
+    position: relative; display: inline-block;
+    color: #FFFFFF;
+  }
+  h2::after {
+    content: '';
+    display: block; height: 3px; width: 40px;
+    background: var(--cyan); border-radius: 2px;
+    margin-top: 0.5rem;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: start;
+  }
+  .about-text { color: #C5D8EE; font-size: 1rem; line-height: 1.8; }
+  .about-text p + p { margin-top: 1rem; }
+  .about-text strong { color: #FFFFFF; font-weight: 600; }
+  .certs-list {
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .cert-item {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-radius: 8px;
+    padding: 0.85rem 1.1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.85rem; font-weight: 500;
+    color: #D0E4F7;
+    transition: border-color 0.2s;
+  }
+  .cert-item:hover { border-color: var(--cyan); }
+  .cert-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cyan); flex-shrink: 0;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+  .skill-card {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-radius: 10px;
+    padding: 1.3rem 1.5rem;
+    transition: all 0.2s;
+  }
+  .skill-card:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 0 20px var(--cyan-glow);
+    transform: translateY(-2px);
+  }
+  .skill-card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    color: #4DD8F5; margin-bottom: 0.7rem;
+  }
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .tag {
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.25);
+    color: #A8CCED; font-size: 0.75rem;
+    padding: 0.25rem 0.6rem; border-radius: 4px;
+    font-family: var(--mono);
+  }
+
+  /* ── EXPERIENCE ── */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 0 2rem;
+    padding-bottom: 2.5rem;
+    position: relative;
+  }
+  .timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 167px; top: 28px; bottom: 0;
+    width: 1px; background: var(--navy-border);
+  }
+  .timeline-date {
+    font-family: var(--mono); font-size: 0.75rem;
+    color: #A8C0DC; padding-top: 0.2rem;
+    text-align: right; line-height: 1.4;
+  }
+  .timeline-dot {
+    position: absolute; left: 158px; top: 8px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--navy); border: 2px solid var(--cyan);
+    z-index: 1;
+  }
+  .timeline-content {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-radius: 10px; padding: 1.3rem 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .timeline-content:hover { border-color: rgba(0,212,255,0.4); }
+  .job-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem; font-weight: 600; color: #FFFFFF;
+    margin-bottom: 0.2rem;
+  }
+  .job-company {
+    font-size: 0.82rem; color: #4DD8F5;
+    margin-bottom: 0.8rem; font-weight: 500;
+  }
+  .job-bullets {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .job-bullets li {
+    font-size: 0.85rem; color: #C5D8EE;
+    padding-left: 1.1rem; position: relative; line-height: 1.5;
+  }
+  .job-bullets li::before {
+    content: '›'; position: absolute; left: 0;
+    color: var(--cyan); font-weight: 700;
+  }
+
+  /* ── PLATFORM BADGES ── */
+  .platforms-grid {
+    display: flex; flex-wrap: wrap; gap: 0.7rem;
+  }
+  .platform-badge {
+    background: var(--navy-card);
+    border: 1px solid #2A4A6E;
+    border-radius: 6px;
+    padding: 0.55rem 1rem;
+    font-size: 0.8rem; color: #B8CDE8;
+    font-family: var(--mono);
+    transition: all 0.2s;
+  }
+  .platform-badge:hover {
+    border-color: var(--cyan); color: var(--white);
+    background: var(--cyan-glow);
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: #0E1E33 !important;
+    border-top: 1px solid var(--navy-border);
+    border-bottom: 1px solid var(--navy-border);
+  }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: center;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.75rem;
+    color: #D0E8FF; text-decoration: none;
+    font-size: 0.9rem; transition: color 0.2s;
+    padding: 0.6rem 0; border-bottom: 1px solid var(--navy-border);
+  }
+  .contact-link:hover { color: var(--cyan); }
+  .contact-link-icon {
+    font-family: var(--mono); font-size: 0.7rem;
+    color: var(--cyan); background: rgba(0,212,255,0.12);
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 4px; padding: 0.2rem 0.5rem;
+    flex-shrink: 0;
+  }
+  .contact-text h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.6rem; font-weight: 700; margin-bottom: 0.8rem;
+    color: #FFFFFF;
+  }
+  .contact-text p { color: #C0D8F0; font-size: 0.95rem; line-height: 1.7; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 2rem;
+    font-family: var(--mono); font-size: 0.7rem;
+    color: #5A7A9A; background: var(--navy);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--navy-border), transparent);
+    margin: 0 2rem;
+    background-color: var(--navy);
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.4rem;
+  }
+  .project-card {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-radius: 12px;
+    padding: 1.6rem;
+    display: flex; flex-direction: column;
+    transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--cyan), transparent);
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .project-card:hover {
+    border-color: rgba(0,212,255,0.4);
+    box-shadow: 0 0 28px var(--cyan-glow);
+    transform: translateY(-3px);
+  }
+  .project-card:hover::before { opacity: 1; }
+  .project-status {
+    font-family: var(--mono); font-size: 0.68rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.2rem 0.55rem; border-radius: 4px;
+    display: inline-block; margin-bottom: 1rem;
+    width: fit-content;
+  }
+  .status-active {
+    background: rgba(0,212,255,0.1);
+    border: 1px solid rgba(0,212,255,0.3);
+    color: var(--cyan);
+  }
+  .status-complete {
+    background: rgba(40,202,65,0.1);
+    border: 1px solid rgba(40,202,65,0.3);
+    color: #28ca41;
+  }
+  .status-wip {
+    background: rgba(255,189,46,0.1);
+    border: 1px solid rgba(255,189,46,0.3);
+    color: #ffbd2e;
+  }
+  .project-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    color: #FFFFFF; margin-bottom: 0.5rem;
+  }
+  .project-subtitle {
+    font-size: 0.78rem; color: #4DD8F5;
+    font-family: var(--mono); margin-bottom: 0.9rem;
+  }
+  .project-desc {
+    font-size: 0.85rem; color: #C5D8EE;
+    line-height: 1.65; flex: 1; margin-bottom: 1.1rem;
+  }
+  .project-stack {
+    display: flex; flex-wrap: wrap; gap: 0.35rem;
+    margin-bottom: 1.1rem;
+  }
+  .project-links {
+    display: flex; gap: 0.7rem; margin-top: auto;
+  }
+  .proj-link {
+    font-family: var(--mono); font-size: 0.72rem;
+    color: #A8C8E8; text-decoration: none;
+    border: 1px solid #2A4A6E;
+    padding: 0.3rem 0.75rem; border-radius: 4px;
+    transition: all 0.2s; letter-spacing: 0.04em;
+  }
+  .proj-link:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; }
+    .timeline-date { text-align: left; }
+    .timeline-item::after { display: none; }
+    .timeline-dot { display: none; }
+    .nav-links { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor { animation: none; opacity: 1; }
+    * { transition: none !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">rashmi.nk</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Available for new opportunities</div>
+    <h1>Rashmi NK<br><span class="hero-title-dim">NOC &amp; DevOps Engineer</span></h1>
+
+    <div class="terminal-block">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">rashmi@ops:~$</span> <span class="t-cmd">whoami</span></div>
+        <div class="t-out">→ <span class="t-hi">NOC &amp; Infrastructure Engineer</span> · 8+ yrs enterprise ops</div>
+        <div><span class="t-prompt">rashmi@ops:~$</span> <span class="t-cmd">cat certs.txt</span></div>
+        <div class="t-out">→ CCNP Enterprise · CCNP Security · CEH · PMP · Cisco Automation</div>
+        <div><span class="t-prompt">rashmi@ops:~$</span> <span class="t-cmd">echo $CURRENT_FOCUS</span></div>
+        <div class="t-out">→ <span class="t-hi">DevOps · Ansible · Terraform · Python · Cloud</span></div>
+        <div><span class="t-prompt">rashmi@ops:~$</span> <span class="cursor"></span></div>
+      </div>
+    </div>
+
+    <p class="hero-desc">
+      Enterprise infrastructure engineer transitioning into <strong>DevOps</strong> — combining 8+ years of mission-critical NOC operations with hands-on automation, cloud, and infrastructure-as-code skills.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="#experience" class="btn-ghost">View experience</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">// background</div>
+    <h2>About Me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Based in <strong>Dubai, UAE</strong>, I'm an infrastructure and NOC engineer with over 8 years of experience in 24x7 enterprise operations — monitoring, incident management, and keeping mission-critical systems alive under pressure.</p>
+        <p>I've worked across large-scale environments at <strong>GBM Dubai</strong> and <strong>Elitser Technologies</strong>, managing everything from network health checks to major incident bridges. My toolkit covers <strong>SolarWinds, ManageEngine, ServiceNow, Cisco, Fortinet, F5, and VMware</strong>.</p>
+        <p>Now I'm channelling that ops experience into <strong>DevOps engineering</strong> — building with Python, Ansible, Terraform, and cloud platforms to automate the work I once did manually. Currently completing a <strong>Master's in AI &amp; ML at Amity University</strong>.</p>
+      </div>
+      <div>
+        <p style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.9rem;margin-bottom:1rem;color:#FFFFFF;">Certifications</p>
+        <div class="certs-list">
+          <div class="cert-item"><div class="cert-dot"></div>CCNP Enterprise</div>
+          <div class="cert-item"><div class="cert-dot"></div>CCNP Security</div>
+          <div class="cert-item"><div class="cert-dot"></div>Cisco Certified Specialist – Automation Core</div>
+          <div class="cert-item"><div class="cert-dot"></div>EC-Council CEH</div>
+          <div class="cert-item"><div class="cert-dot"></div>PMP® (PMI)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">// capabilities</div>
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">Infrastructure Monitoring</div>
+        <div class="skill-tags">
+          <span class="tag">SolarWinds</span>
+          <span class="tag">ManageEngine</span>
+          <span class="tag">OpManager</span>
+          <span class="tag">App Manager</span>
+          <span class="tag">24x7 Ops</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Networking &amp; Security</div>
+        <div class="skill-tags">
+          <span class="tag">TCP/IP</span>
+          <span class="tag">VLANs</span>
+          <span class="tag">VPN</span>
+          <span class="tag">Cisco</span>
+          <span class="tag">Fortinet</span>
+          <span class="tag">Palo Alto</span>
+          <span class="tag">F5 LTM/GTM</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Automation &amp; DevOps</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Ansible</span>
+          <span class="tag">Terraform</span>
+          <span class="tag">Netmiko</span>
+          <span class="tag">Shell</span>
+          <span class="tag">Git</span>
+          <span class="tag">YAML</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Cloud &amp; Virtualization</div>
+        <div class="skill-tags">
+          <span class="tag">AWS</span>
+          <span class="tag">Azure</span>
+          <span class="tag">VMware</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Linux</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">ITSM &amp; Incident Mgmt</div>
+        <div class="skill-tags">
+          <span class="tag">ServiceNow</span>
+          <span class="tag">SLA Mgmt</span>
+          <span class="tag">Escalation</span>
+          <span class="tag">Major Incidents</span>
+          <span class="tag">RCA</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Systems Administration</div>
+        <div class="skill-tags">
+          <span class="tag">Windows Server</span>
+          <span class="tag">Linux Admin</span>
+          <span class="tag">User Mgmt</span>
+          <span class="tag">Health Checks</span>
+          <span class="tag">API</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.9rem;margin:2.5rem 0 1rem;color:#FFFFFF;">Platform Expertise</p>
+    <div class="platforms-grid">
+      <div class="platform-badge">SolarWinds</div>
+      <div class="platform-badge">ServiceNow</div>
+      <div class="platform-badge">ManageEngine</div>
+      <div class="platform-badge">F5 Load Balancers</div>
+      <div class="platform-badge">Cisco ASA / FTD</div>
+      <div class="platform-badge">Fortinet FortiGate</div>
+      <div class="platform-badge">Palo Alto NGFW</div>
+      <div class="platform-badge">VMware vSphere</div>
+      <div class="platform-badge">AWS Cloud</div>
+      <div class="platform-badge">Microsoft Azure</div>
+      <div class="platform-badge">GitHub Actions</div>
+      <div class="platform-badge">Docker</div>
+      <div class="platform-badge">Ansible</div>
+      <div class="platform-badge">Terraform</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">// career history</div>
+    <h2>Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">Jul 2024<br>– May 2025</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="job-title">Implementation Engineer</div>
+          <div class="job-company">Elitser Technologies · Dubai, UAE</div>
+          <ul class="job-bullets">
+            <li>Designed and deployed enterprise monitoring solutions using ManageEngine OpManager and Applications Manager across multi-vendor environments.</li>
+            <li>Created custom dashboards, alerts, reports, and automated remediation workflows for critical business services.</li>
+            <li>Conducted root cause analysis for infrastructure and application performance issues.</li>
+            <li>Automated monitoring and operational tasks using APIs and scripting techniques.</li>
+            <li>Produced technical documentation, implementation runbooks, and operational procedures.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Aug 2018<br>– Feb 2023</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="job-title">NOC Engineer – Network Support</div>
+          <div class="job-company">Gulf Business Machines (GBM) · Dubai, UAE</div>
+          <ul class="job-bullets">
+            <li>Provided 24×7 monitoring and operational support for enterprise network and IT infrastructure environments.</li>
+            <li>Managed L1/L2 triage, incident classification, and escalation through ITSM processes while ensuring SLA compliance.</li>
+            <li>Led Major Incident Management including bridge calls, stakeholder communication, and status updates.</li>
+            <li>Troubleshot TCP/IP, VLAN, VPN, routing, switching, and infrastructure-related issues.</li>
+            <li>Supported mission-critical environments for large-scale events and enterprise operations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Aug 2016<br>– May 2017</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="job-title">Analyst – DC Operations</div>
+          <div class="job-company">HCL Technologies · India</div>
+          <ul class="job-bullets">
+            <li>Data centre operations support in a 24×7 shift environment.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2012<br>– 2016</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="job-title">Client Tech &amp; Technical Support</div>
+          <div class="job-company">Dell Services · Convergys India Pvt Ltd</div>
+          <ul class="job-bullets">
+            <li>Enterprise and consumer technical support, building a strong foundation in customer-facing troubleshooting and service delivery.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">// builds</div>
+    <h2>Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <span class="project-status status-active">🔨 In Progress</span>
+        <div class="project-title">Release Atlas v2</div>
+        <div class="project-subtitle">reloqui-ai · github.com/RNK-AI-Codes</div>
+        <p class="project-desc">
+          Multi-tenant SaaS platform originally scoped for a team of 8 — building it solo. Full-stack DevOps project featuring FastAPI backend, PostgreSQL, and Next.js frontend deployed via Docker Compose with a GitHub Actions CI pipeline. Includes Alembic migrations, ADR documentation, and mono-repo architecture.
+        </p>
+        <div class="project-stack">
+          <span class="tag">FastAPI</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">Docker</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Alembic</span>
+          <span class="tag">Python 3.13</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/RNK-AI-Codes" target="_blank" class="proj-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-status status-complete">✓ Phase 1 Complete</span>
+        <div class="project-title">FlaskOps</div>
+        <div class="project-subtitle">6-Phase DevOps Demo Project</div>
+        <p class="project-desc">
+          End-to-end DevOps pipeline built around a Python Flask application. Phase 1 delivered a containerised Flask app with a full pytest suite and Docker Compose. Subsequent phases add Terraform provisioning on AWS EC2, Ansible configuration management, and Prometheus + Grafana monitoring.
+        </p>
+        <div class="project-stack">
+          <span class="tag">Python / Flask</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Terraform</span>
+          <span class="tag">Ansible</span>
+          <span class="tag">AWS EC2</span>
+          <span class="tag">Prometheus</span>
+          <span class="tag">Grafana</span>
+          <span class="tag">pytest</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/RNK-AI-Codes" target="_blank" class="proj-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-status status-wip">⚡ Ongoing</span>
+        <div class="project-title">Network Automation Lab</div>
+        <div class="project-subtitle">Python · Netmiko · Ansible</div>
+        <p class="project-desc">
+          Hands-on automation scripts for network operations tasks — leveraging Netmiko for SSH-based device configuration, Ansible playbooks for multi-vendor network changes, and Python for API-driven monitoring integrations. Bridges my NOC background with Infrastructure-as-Code practices.
+        </p>
+        <div class="project-stack">
+          <span class="tag">Python</span>
+          <span class="tag">Netmiko</span>
+          <span class="tag">Ansible</span>
+          <span class="tag">YAML</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">JSON</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/RNK-AI-Codes" target="_blank" class="proj-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-status status-complete">✓ Deployed</span>
+        <div class="project-title">Enterprise Monitoring Rollout</div>
+        <div class="project-subtitle">Elitser Technologies · 2024–2025</div>
+        <p class="project-desc">
+          Designed and delivered a full ManageEngine monitoring stack (OpManager + Applications Manager) for enterprise clients — covering servers, networks, applications, and storage across multi-vendor environments. Built custom dashboards, alert templates, and automated remediation workflows from scratch.
+        </p>
+        <div class="project-stack">
+          <span class="tag">ManageEngine</span>
+          <span class="tag">OpManager</span>
+          <span class="tag">APIs</span>
+          <span class="tag">Scripting</span>
+          <span class="tag">Multi-vendor</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-text">
+        <div class="section-label">// connect</div>
+        <h3>Let's work together.</h3>
+        <p>Open to DevOps Engineer, NOC Lead, and Infrastructure Automation roles in Dubai or remotely. Feel free to reach out on any channel.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:er.rashmi.nk@gmail.com" class="contact-link">
+          <span class="contact-link-icon">EMAIL</span>
+          er.rashmi.nk@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/rashmi-nk" target="_blank" class="contact-link">
+          <span class="contact-link-icon">LI</span>
+          linkedin.com/in/rashmi-nk
+        </a>
+        <a href="https://github.com/RNK-AI-Codes" target="_blank" class="contact-link">
+          <span class="contact-link-icon">GH</span>
+          github.com/RNK-AI-Codes
+        </a>
+        <a href="tel:+971547701129" class="contact-link">
+          <span class="contact-link-icon">TEL</span>
+          +971 547 701 129
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span style="color:var(--muted)">rashmi NK</span> &nbsp;·&nbsp; Dubai, UAE &nbsp;·&nbsp; built with intention
+</footer>
+
+</body>
+</html>
